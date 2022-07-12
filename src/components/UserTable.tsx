@@ -1,4 +1,4 @@
-import { MDBTable, MDBTableHead, MDBTableBody, MDBContainer } from 'mdb-react-ui-kit';
+import { MDBContainer } from 'mdb-react-ui-kit';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { User } from '../data/data';
 

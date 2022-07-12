@@ -21,73 +21,73 @@ export const Users: User[] = [
         id: 1,
         name: 'John Doe',
         role: 'admin',
-        date: '2022-07-07'
+        date: '07/07/2022'
     },
     {
         id: 2,
         name: 'Tom',
         role: 'editor',
-        date: '2022-07-08'
+        date: '07/08/2022'
     },
     {
         id: 3,
         name: 'Hooka',
         role: 'member',
-        date: '2022-07-10'
+        date: '07/01/2022'
     },
     {
         id: 4,
         name: 'Yangyang',
         role: 'member',
-        date: '2022-07-11'
+        date: '05/07/2022'
     },
     {
         id: 5,
         name: 'Chichan',
         role: 'admin',
-        date: '2022-06-07'
+        date: '04/07/2022'
     },
     {
         id: 6,
         name: 'Babo',
         role: 'editor',
-        date: '2022-07-12'
+        date: '03/07/2022'
     },
     {
         id: 7,
         name: 'Panda',
         role: 'member',
-        date: '2022-07-10'
+        date: '05/07/2022'
     },
     {
         id: 8,
         name: 'Adam',
         role: 'member',
-        date: '2022-07-11'
+        date: '07/04/2022'
     },
     {
         id: 9,
         name: 'Eve',
         role: 'admin',
-        date: '2022-08-11'
+        date: '04/07/2022'
+    },
+    {
+        id: 10,
+        name: 'Kelly',
+        role: 'editor',
+        date: '02/07/2022'
     },
     {
         id: 11,
-        name: 'Kelly',
-        role: 'editor',
-        date: '2022-09-09'
+        name: 'Hikmah',
+        role: 'member',
+        date: '04/07/2022'
     },
     {
         id: 12,
-        name: 'Hikmah',
-        role: 'member',
-        date: '2022-07-10'
-    },
-    {
-        id: 13,
         name: 'Aoi',
         role: 'member',
-        date: '2022-07-11'
+        date: '03/07/2022'
     }
 ];
 
