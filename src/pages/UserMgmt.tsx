@@ -1,6 +1,8 @@
+import { MDBContainer, MDBTypography } from 'mdb-react-ui-kit';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import UserTable from '../components/UserTable';
 import { User } from '../data/data';
 import { actionCreators, State } from '../redux/index';
 
@@ -12,17 +14,11 @@ function UserMgmt() {
         console.log(users);
     });
     return (
-        <div>
-            UserMgmt
-            {users &&
-                users.map((user) => (
-                    <div key={user.id}>
-                        <p>{user.name}</p>
-                        <p>{user.role}</p>
-                        <p>{user.date.toLocaleDateString()}</p>
-                    </div>
-                ))}
-        </div>
+        <MDBContainer className="pb-5">
+            <p className="h3 responsive mt-2">User Management</p>
+            <hr />
+            {users && <UserTable users={users} />}
+        </MDBContainer>
     );
 }
 

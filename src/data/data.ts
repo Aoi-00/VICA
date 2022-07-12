@@ -2,7 +2,7 @@ export type User = {
     id: number;
     name: string;
     role: string;
-    date: Date;
+    date: string;
 };
 
 export type Book = {
@@ -21,25 +21,73 @@ export const Users: User[] = [
         id: 1,
         name: 'John Doe',
         role: 'admin',
-        date: new Date('2022-07-07')
+        date: '2022-07-07'
     },
     {
         id: 2,
         name: 'Tom',
         role: 'editor',
-        date: new Date('2022-07-08')
+        date: '2022-07-08'
     },
     {
         id: 3,
         name: 'Hooka',
         role: 'member',
-        date: new Date('2022-07-10')
+        date: '2022-07-10'
     },
     {
         id: 4,
         name: 'Yangyang',
         role: 'member',
-        date: new Date('2022-07-11')
+        date: '2022-07-11'
+    },
+    {
+        id: 5,
+        name: 'Chichan',
+        role: 'admin',
+        date: '2022-06-07'
+    },
+    {
+        id: 6,
+        name: 'Babo',
+        role: 'editor',
+        date: '2022-07-12'
+    },
+    {
+        id: 7,
+        name: 'Panda',
+        role: 'member',
+        date: '2022-07-10'
+    },
+    {
+        id: 8,
+        name: 'Adam',
+        role: 'member',
+        date: '2022-07-11'
+    },
+    {
+        id: 9,
+        name: 'Eve',
+        role: 'admin',
+        date: '2022-08-11'
+    },
+    {
+        id: 11,
+        name: 'Kelly',
+        role: 'editor',
+        date: '2022-09-09'
+    },
+    {
+        id: 12,
+        name: 'Hikmah',
+        role: 'member',
+        date: '2022-07-10'
+    },
+    {
+        id: 13,
+        name: 'Aoi',
+        role: 'member',
+        date: '2022-07-11'
     }
 ];
 
