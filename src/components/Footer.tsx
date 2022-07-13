@@ -3,8 +3,8 @@ import { MDBFooter, MDBContainer, MDBCol, MDBRow, MDBIcon } from 'mdb-react-ui-k
 export default function Footer() {
     return (
         <MDBFooter className="bg-dark text-center text-white fixed-bottom">
-            <MDBContainer className="p-4 pb-0">
-                <section className="mb-4">
+            <MDBContainer className="p-4 pb-0 pt-3">
+                <section className="mb-3">
                     <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
                         <MDBIcon fab icon="facebook-f" />
                     </a>

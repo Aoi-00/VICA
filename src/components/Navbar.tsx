@@ -1,6 +1,8 @@
 import { MDBNavbar, MDBContainer, MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbarBrand, MDBIcon, MDBNavbarItem, MDBNavbarLink, MDBNavbarNav, MDBNavbarToggler } from 'mdb-react-ui-kit';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+    let navigate = useNavigate();
     return (
         <MDBNavbar expand="lg" light bgColor="white">
             <MDBContainer fluid>
@@ -15,13 +17,13 @@ export default function Navbar() {
                             </MDBNavbarBrand>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href="/book">Books</MDBNavbarLink>
+                            <MDBNavbarLink onClick={() => navigate('/book')}>Books</MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href="/user">Users</MDBNavbarLink>
+                            <MDBNavbarLink onClick={() => navigate('/user')}>Users</MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href="/analytics">Analytics</MDBNavbarLink>
+                            <MDBNavbarLink onClick={() => navigate('/analytics')}>Analytics</MDBNavbarLink>
                         </MDBNavbarItem>
                     </MDBNavbarNav>
                 </div>

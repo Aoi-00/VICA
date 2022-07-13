@@ -1,19 +1,44 @@
-import { MDBContainer } from 'mdb-react-ui-kit';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { MDBBtn, MDBContainer, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle, MDBRadio } from 'mdb-react-ui-kit';
+import React, { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { User } from '../data/data';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, RowSelectedEvent } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { error } from 'console';
 
 interface IUserTableProps {
     users: User[];
+    addUser: Function;
+    removeUser: Function;
 }
 
-const UserTable: React.FC<IUserTableProps> = ({ users }) => {
+const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser }) => {
+    const gridRef = useRef() as MutableRefObject<AgGridReact<User>>;
     const [rowData, setRowData] = useState<User[]>([]);
-    const [columnDefs, setColumnDefs] = useState<{ field: string }[]>([{ field: 'id' }, { field: 'name' }, { field: 'role' }, { field: 'date' }]);
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([
+        { field: 'id' },
+        { field: 'name', editable: true },
+        {
+            field: 'role',
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: {
+                values: ['admin', 'editor', 'member']
+            },
+            editable: true
+        },
+        { field: 'date' }
+    ]);
+
+    const [basicModal, setBasicModal] = useState(false);
+    const toggleShow = () => setBasicModal(!basicModal);
+    const [newUser, setNewUser] = useState({} as User);
+    const [error, setError] = useState(false);
+    useEffect(() => {
+        console.log(newUser);
+    }, [newUser]);
+
     useEffect(() => {
         setRowData(users);
     }, [users]);
@@ -22,22 +47,74 @@ const UserTable: React.FC<IUserTableProps> = ({ users }) => {
         () => ({
             sortable: true,
             filter: true,
-            //editable: false,
             flex: 1
         }),
         []
     );
 
-    const cellClickedListener = useCallback((e: any) => {
-        console.log('cellClicked', e.data);
+    const onSubmit = () => {
+        if (newUser.name === undefined || newUser.name === '' || newUser.role === undefined) {
+            setError(true);
+        } else {
+            setError(false);
+            let form = { ...newUser, id: Object.keys(users).length + 1, date: new Date().toLocaleDateString() };
+            addUser(form);
+            toggleShow();
+            setNewUser({ ...newUser, name: '' });
+        }
+    };
+
+    const deleteUser = useCallback(() => {
+        const selectedNodes = gridRef.current.api.getSelectedNodes();
+        const selectedIds = selectedNodes.map((node) => node?.data.id); //optional chaining to check for null/undefined, will return undefined otherwise
+        let delUser = users.filter((user) => selectedIds.indexOf(user.id) >= 0);
+        delUser.forEach((eachUser) => {
+            removeUser(eachUser);
+        });
+        users = users.filter((user) => selectedIds.indexOf(user.id) < 0);
+        setRowData(users);
     }, []);
 
     return (
-        //rowSelection = 'multiple'
         <MDBContainer>
-            <div className="ag-theme-material mh-100" style={{ height: '60vh' }}>
+            <div className="mb-2">
+                <MDBBtn outline color="danger" floating tag="a" onClick={deleteUser}>
+                    <MDBIcon fas icon="trash-alt" />
+                </MDBBtn>
+                <MDBBtn outline className="ms-3" floating tag="a" onClick={toggleShow}>
+                    <MDBIcon fas icon="plus" />
+                </MDBBtn>
+            </div>
+            <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+                <MDBModalDialog>
+                    <MDBModalContent>
+                        <MDBModalHeader>
+                            <MDBModalTitle>New User</MDBModalTitle>
+                            <MDBBtn className="btn-close" color="none" onClick={toggleShow}></MDBBtn>
+                        </MDBModalHeader>
+                        <MDBModalBody>
+                            <div className="h6 responsive">
+                                {error && <p className="text-danger">Please enter all fields</p>}
+                                <MDBInput className="mb-2" label="Name" type="text" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
+                                <MDBRadio inline name="flexRadioDefault" label="Admin" value="admin" onClick={(e) => setNewUser({ ...newUser, role: (e.target as HTMLInputElement).value })} />
+                                <MDBRadio inline name="flexRadioDefault" label="Editor" value="editor" onClick={(e) => setNewUser({ ...newUser, role: (e.target as HTMLInputElement).value })} />
+                                <MDBRadio inline name="flexRadioDefault" label="Member" value="member" onClick={(e) => setNewUser({ ...newUser, role: (e.target as HTMLInputElement).value })} />
+                            </div>
+                        </MDBModalBody>
+                        <MDBModalFooter>
+                            <MDBBtn color="danger" onClick={toggleShow}>
+                                Cancel
+                            </MDBBtn>
+                            <MDBBtn onClick={onSubmit}>Submit</MDBBtn>
+                        </MDBModalFooter>
+                    </MDBModalContent>
+                </MDBModalDialog>
+            </MDBModal>
+            <div className="ag-theme-alpine mh-100" style={{ height: '50vh' }}>
                 <AgGridReact
-                    onCellClicked={cellClickedListener}
+                    ref={gridRef}
+                    rowSelection="multiple"
+                    rowMultiSelectWithClick={true}
                     columnDefs={columnDefs}
                     rowData={rowData}
                     defaultColDef={defaultColDef}
