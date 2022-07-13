@@ -8,10 +8,11 @@ function Signin() {
         if (sessionStorage.getItem('role') != null) {
             navigate('/book');
         }
-    }, []); //run only once like componentdidmount
+    }, []); //runs only once like componentdidmount
 
-    const btnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        sessionStorage.setItem('role', (e.target as HTMLAnchorElement).id);
+    const btnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        sessionStorage.setItem('role', (e.target as HTMLDivElement).id);
+        navigate('/book');
     };
 
     return (
@@ -22,15 +23,15 @@ function Signin() {
                         <div className="text-white">
                             <h1 className="mb-3">Welcome to ABC Book Fan Club</h1>
                             <h4 className="mb-3">Sign in as</h4>
-                            <a id="admin" className="btn btn-outline-light btn-lg me-3" href="/book" role="button" onClick={(e) => btnClick(e)}>
+                            <div id="admin" className="btn btn-outline-light btn-lg me-3" role="button" onClick={(e) => btnClick(e)}>
                                 Admin
-                            </a>
-                            <a id="editor" className="btn btn-outline-light btn-lg me-3" href="/book" role="button" onClick={(e) => btnClick(e)}>
+                            </div>
+                            <div id="editor" className="btn btn-outline-light btn-lg me-3" role="button" onClick={(e) => btnClick(e)}>
                                 Editor
-                            </a>
-                            <a id="member" className="btn btn-outline-light btn-lg" href="/book" role="button" onClick={(e) => btnClick(e)}>
+                            </div>
+                            <div id="member" className="btn btn-outline-light btn-lg" role="button" onClick={(e) => btnClick(e)}>
                                 Member
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

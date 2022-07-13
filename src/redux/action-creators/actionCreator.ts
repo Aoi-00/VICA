@@ -29,11 +29,28 @@ export const updateUser = (user: User) => {
     };
 };
 
-export const listUser = (user: User) => {
+export const addBook = (book: Book) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
-            type: ActionType.UPDATEUSER,
-            payload: user
+            type: ActionType.ADDBOOK,
+            payload: book
+        });
+    };
+};
+
+export const removeBook = (book: Book) => {
+    return (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.REMOVEBOOK,
+            payload: book
+        });
+    };
+};
+export const updateBook = (book: Book) => {
+    return (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.UPDATEBOOK,
+            payload: book
         });
     };
 };

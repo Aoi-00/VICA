@@ -19,9 +19,11 @@ export default function Navbar() {
                         <MDBNavbarItem>
                             <MDBNavbarLink onClick={() => navigate('/book')}>Books</MDBNavbarLink>
                         </MDBNavbarItem>
-                        <MDBNavbarItem>
-                            <MDBNavbarLink onClick={() => navigate('/user')}>Users</MDBNavbarLink>
-                        </MDBNavbarItem>
+                        {sessionStorage.getItem('role') !== 'member' && (
+                            <MDBNavbarItem>
+                                <MDBNavbarLink onClick={() => navigate('/user')}>Users</MDBNavbarLink>
+                            </MDBNavbarItem>
+                        )}
                         <MDBNavbarItem>
                             <MDBNavbarLink onClick={() => navigate('/analytics')}>Analytics</MDBNavbarLink>
                         </MDBNavbarItem>

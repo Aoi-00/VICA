@@ -2,5 +2,8 @@ export enum ActionType {
     ADDUSER = 'addUser',
     REMOVEUSER = 'removeUser',
     UPDATEUSER = 'updateUser',
-    LISTUSER = 'listUser'
+
+    ADDBOOK = 'addBook',
+    REMOVEBOOK = 'removeBook',
+    UPDATEBOOK = 'updateBook'
 }

@@ -1,6 +1,6 @@
 import { MDBBtn, MDBContainer, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle, MDBRadio } from 'mdb-react-ui-kit';
 import React, { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { User } from '../data/data';
+import { User } from '../../data/data';
 
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowSelectedEvent } from 'ag-grid-community';
@@ -12,21 +12,31 @@ interface IUserTableProps {
     users: User[];
     addUser: Function;
     removeUser: Function;
+    updateUser: Function;
 }
 
-const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser }) => {
+const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser, updateUser }) => {
     const gridRef = useRef() as MutableRefObject<AgGridReact<User>>;
     const [rowData, setRowData] = useState<User[]>([]);
+
+    const saveNewValue = (params) => {
+        let field = params.column.colId;
+        let newRow = { ...params.data };
+        newRow[field] = params.newValue;
+        updateUser(newRow);
+        return false;
+    };
+
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([
         { field: 'id' },
-        { field: 'name', editable: true },
+        { field: 'name', editable: sessionStorage.getItem('role') === 'admin' },
         {
             field: 'role',
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: {
                 values: ['admin', 'editor', 'member']
             },
-            editable: true
+            editable: sessionStorage.getItem('role') === 'admin'
         },
         { field: 'date' }
     ]);
@@ -47,7 +57,8 @@ const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser }) =>
         () => ({
             sortable: true,
             filter: true,
-            flex: 1
+            flex: 1,
+            valueSetter: saveNewValue
         }),
         []
     );
@@ -77,14 +88,16 @@ const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser }) =>
 
     return (
         <MDBContainer>
-            <div className="mb-2">
-                <MDBBtn outline color="danger" floating tag="a" onClick={deleteUser}>
-                    <MDBIcon fas icon="trash-alt" />
-                </MDBBtn>
-                <MDBBtn outline className="ms-3" floating tag="a" onClick={toggleShow}>
-                    <MDBIcon fas icon="plus" />
-                </MDBBtn>
-            </div>
+            {sessionStorage.getItem('role') === 'admin' && (
+                <div className="mb-2">
+                    <MDBBtn outline color="danger" floating tag="a" onClick={deleteUser}>
+                        <MDBIcon fas icon="trash-alt" />
+                    </MDBBtn>
+                    <MDBBtn outline className="ms-3" floating tag="a" onClick={toggleShow}>
+                        <MDBIcon fas icon="plus" />
+                    </MDBBtn>
+                </div>
+            )}
             <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
                 <MDBModalDialog>
                     <MDBModalContent>

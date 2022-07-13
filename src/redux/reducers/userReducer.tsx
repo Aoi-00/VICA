@@ -31,10 +31,6 @@ const userReducer = (state = initState, action: Action) => {
                 ...state,
                 users: newUsers
             };
-        case ActionType.LISTUSER:
-            return {
-                ...state
-            };
         default:
             return state;
     }

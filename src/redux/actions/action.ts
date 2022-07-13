@@ -1,5 +1,5 @@
 import { ActionType } from '../action-types/actionType';
-import { User } from '../../data/data';
+import { Book, User } from '../../data/data';
 
 interface AddAction {
     type: ActionType.ADDUSER;
@@ -14,9 +14,17 @@ interface UpdateAction {
     payload: User;
 }
 
-interface ListAction {
-    type: ActionType.LISTUSER;
-    payload: User;
+interface AddBook {
+    type: ActionType.ADDBOOK;
+    payload: Book;
+}
+interface RemoveBook {
+    type: ActionType.REMOVEBOOK;
+    payload: Book;
+}
+interface UpdateBook {
+    type: ActionType.UPDATEBOOK;
+    payload: Book;
 }
 
-export type Action = AddAction | RemoveAction | UpdateAction | ListAction;
+export type Action = AddAction | RemoveAction | UpdateAction | AddBook | RemoveBook | UpdateBook;
