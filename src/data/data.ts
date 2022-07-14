@@ -120,7 +120,7 @@ export const Books: Book[] = [
             "Romeo and Juliet is a tragedy written by William Shakespeare early in his career about two young Italian star-crossed lovers whose deaths ultimately reconcile their feuding families. It was among Shakespeare's most popular plays during his lifetime and, along with Hamlet, is one of his most frequently performed plays.",
         genre: ['Romance', 'Drama'],
         author: 'William Shakespeare',
-        year: '1597',
+        year: '2018',
         availability: 1,
         lastBorrower: 'Tom'
     },
@@ -142,7 +142,7 @@ export const Books: Book[] = [
             'Navier Ellie Trovi was an empress perfect in every way -- intelligent, courageous, and socially adept. She was kind to her subjects and devoted to her husband. Navier was perfectly content to live the rest of her days as the wise empress of the Eastern Empire. That is, until her husband brought home a mistress and demanded a divorce. “I accept this divorce… And I request an approval of my remarriage.” In a shocking twist, Navier remarries another emperor and retains her title and childhood dream as empress. But just how did everything unfold?',
         genre: ['Romance', 'Tragedy'],
         author: 'Alphatart',
-        year: '2019',
+        year: '2022',
         availability: 3,
         lastBorrower: 'Hooka'
     }

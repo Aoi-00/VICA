@@ -45,9 +45,6 @@ const UserTable: React.FC<IUserTableProps> = ({ users, addUser, removeUser, upda
     const toggleShow = () => setBasicModal(!basicModal);
     const [newUser, setNewUser] = useState({} as User);
     const [error, setError] = useState(false);
-    useEffect(() => {
-        console.log(newUser);
-    }, [newUser]);
 
     useEffect(() => {
         setRowData(users);

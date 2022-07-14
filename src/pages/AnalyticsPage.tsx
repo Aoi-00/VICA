@@ -20,7 +20,7 @@ function AnalyticsPage() {
                     <PieChart books={books} />
                 </MDBCol>
                 <MDBCol className="col-md-6">
-                    <LineChart />
+                    <LineChart books={books} />
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
