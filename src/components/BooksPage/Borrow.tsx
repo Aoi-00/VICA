@@ -41,7 +41,7 @@ const Borrow: React.FC<IBorrowProps> = ({ updateBook }) => {
                 ) : (
                     borrowed.map((book) => {
                         return (
-                            <tr>
+                            <tr id={book.id.toString()}>
                                 <th scope="row">{book.id}</th>
                                 <td>{book.title}</td>
                                 <td>{book.description}</td>

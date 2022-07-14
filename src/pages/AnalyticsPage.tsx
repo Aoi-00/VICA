@@ -7,10 +7,6 @@ import { useEffect } from 'react';
 
 function AnalyticsPage() {
     const books = useSelector((state: State) => state.book.book);
-
-    // useEffect(() => {
-    //     console.log(books);
-    // }, []);
     return (
         <MDBContainer className="pb-5">
             <p className="h3 responsive mt-2">Analytics </p>

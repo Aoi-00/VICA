@@ -84,18 +84,34 @@ const BooksTable: React.FC<IBooksTableProps> = ({ books, addBook, removeBook, up
         setRowData(books);
     }, []);
 
+    const borrowBook = useCallback(() => {
+        const selectedNodes = gridRef.current.api.getSelectedNodes();
+        const selectedIds = selectedNodes.map((node) => node?.data.id); //optional chaining to check for null/undefined, will return undefined otherwise
+        let borrow = books.filter((book) => selectedIds.indexOf(book.id) >= 0);
+        borrow.forEach((eachBook) => {
+            if (eachBook.availability >= 1) {
+                updateBook({ ...eachBook, availability: eachBook.availability - 1, lastBorrower: sessionStorage.getItem('name') });
+            }
+        });
+    }, []);
+
     return (
         <MDBContainer>
-            {sessionStorage.getItem('role') === 'admin' && (
-                <div className="mb-2">
-                    <MDBBtn outline color="danger" floating tag="a" onClick={deleteBook}>
-                        <MDBIcon fas icon="trash-alt" />
-                    </MDBBtn>
-                    <MDBBtn outline className="ms-3" floating tag="a" onClick={toggleShow}>
-                        <MDBIcon fas icon="plus" />
-                    </MDBBtn>
-                </div>
-            )}
+            <div className="mb-2">
+                <MDBBtn color="success" outline floating tag="a" onClick={borrowBook}>
+                    <MDBIcon fas icon="book" />
+                </MDBBtn>
+                {sessionStorage.getItem('role') !== 'member' && (
+                    <div>
+                        <MDBBtn outline color="danger" floating tag="a" onClick={deleteBook}>
+                            <MDBIcon fas icon="trash-alt" />
+                        </MDBBtn>
+                        <MDBBtn outline className="ms-3" floating tag="a" onClick={toggleShow}>
+                            <MDBIcon fas icon="plus" />
+                        </MDBBtn>
+                    </div>
+                )}
+            </div>
             <NewBook basicModal={basicModal} setBasicModal={setBasicModal} addBook={addBook} />
 
             <div className="ag-theme-alpine mh-100" style={{ height: '50vh' }}>
