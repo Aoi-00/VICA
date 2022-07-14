@@ -41,6 +41,8 @@ const BooksTable: React.FC<IBooksTableProps> = ({ books, addBook, removeBook, up
         { field: 'title', editable: sessionStorage.getItem('role') !== 'member' },
         {
             field: 'description',
+            cellEditor: 'agLargeTextCellEditor',
+            cellEditorPopup: true,
             editable: sessionStorage.getItem('role') !== 'member'
         },
         { field: 'genre', editable: sessionStorage.getItem('role') !== 'member' },

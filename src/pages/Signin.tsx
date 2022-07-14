@@ -12,6 +12,7 @@ function Signin() {
 
     const btnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         sessionStorage.setItem('role', (e.target as HTMLDivElement).id);
+        sessionStorage.setItem('name', (e.target as HTMLDivElement).ariaLabel);
         navigate('/book');
     };
 
@@ -23,13 +24,13 @@ function Signin() {
                         <div className="text-white">
                             <h1 className="mb-3">Welcome to ABC Book Fan Club</h1>
                             <h4 className="mb-3">Sign in as</h4>
-                            <div id="admin" className="btn btn-outline-light btn-lg me-3" role="button" onClick={(e) => btnClick(e)}>
+                            <div id="admin" aria-label={'John Doe'} className="btn btn-outline-light btn-lg me-3" role="button" onClick={(e) => btnClick(e)}>
                                 Admin
                             </div>
-                            <div id="editor" className="btn btn-outline-light btn-lg me-3" role="button" onClick={(e) => btnClick(e)}>
+                            <div id="editor" className="btn btn-outline-light btn-lg me-3" role="button" aria-label={'Tom'} onClick={(e) => btnClick(e)}>
                                 Editor
                             </div>
-                            <div id="member" className="btn btn-outline-light btn-lg" role="button" onClick={(e) => btnClick(e)}>
+                            <div id="member" className="btn btn-outline-light btn-lg" role="button" aria-label={'Hooka'} onClick={(e) => btnClick(e)}>
                                 Member
                             </div>
                         </div>

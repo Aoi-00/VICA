@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { bindActionCreators } from 'redux';
 import BooksTable from '../components/BooksPage/BooksTable';
+import Borrow from '../components/BooksPage/Borrow';
 import { actionCreators, State } from '../redux/index';
 
 function BookMgmt() {
@@ -19,10 +20,12 @@ function BookMgmt() {
     }, []);
 
     return (
-        <MDBContainer className="pb-5">
+        <MDBContainer className="pb-5 mb-5">
             <p className="h3 responsive mt-2">Book Management </p>
             <hr />
             <BooksTable books={books} addBook={addBook} removeBook={removeBook} updateBook={updateBook} />
+            <hr />
+            <Borrow updateBook={updateBook} />
         </MDBContainer>
     );
 }
