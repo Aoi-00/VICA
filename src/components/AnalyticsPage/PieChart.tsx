@@ -16,7 +16,7 @@ export const PieChart: React.FC<IPieChartProps> = ({ books }) => {
         let labels: { genre: string; count: number }[] = [];
         books.forEach((x) => {
             x.genre.forEach((each) => {
-                let exists = labels.find((x) => x.genre === each);
+                let exists = labels.find((x) => x.genre.toLowerCase() === each.toLowerCase());
                 if (!exists) {
                     labels.push({ genre: each, count: 1 });
                 } else {

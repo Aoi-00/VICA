@@ -6,7 +6,6 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowSelectedEvent } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { error } from 'console';
 
 interface IUserTableProps {
     users: User[];

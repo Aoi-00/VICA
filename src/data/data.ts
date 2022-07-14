@@ -13,7 +13,7 @@ export type Book = {
     author: string;
     year: string;
     availability: number;
-    lastBorrower: string;
+    lastBorrower: string | null;
 };
 
 export const Users: User[] = [
