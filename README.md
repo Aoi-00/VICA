@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using their typescript template.
 
+# Table of Contents
+
+1. [Setup](#setup-instructions)
+2. [Assumptions](#assumptions)
+3. [Redux](#redux)
+4. [File Structure](#project-file-structure)
+5. [Code Implementation](#code-implementation)
+6. [Scalability](#scalability)
+
 ## Setup Instructions
 
 To start, please install relevant node modules by running 'npm install'. Then, in the project directory, you can run:
